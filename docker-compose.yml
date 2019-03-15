@@ -3,25 +3,30 @@ version: '2'
 services:
 
   elasticsearch:
+    container_name: elasticsearch
     build:
       context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
+    restart: always
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - es-data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ES_JAVA_OPTS: "-Xmx1g -Xms1g"
     networks:
       - elk
 
   logstash:
+    container_name: logstash
     build:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
+    restart: always
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -36,10 +41,12 @@ services:
       - elasticsearch
 
   kibana:
+    container_name: kibana
     build:
       context: kibana/
       args:
         ELK_VERSION: $ELK_VERSION
+    restart: always
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -49,7 +56,9 @@ services:
     depends_on:
       - elasticsearch
 
-networks:
+volumes:
+  es-data:
 
+networks:
   elk:
     driver: bridge
