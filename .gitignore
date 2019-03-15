@@ -1,0 +1,46 @@
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+out/
+logs/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#Gradle
+.gradletasknamecache
+.gradle/
+build/
+bin/
+target/
+
+# OS X generated files #
+########################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+#Ansible
+*.retry
+ansible.cfg
+.ansible
+
+#Eclipse project files
+.settings/
+.classpath
+.project
+.checkstyle
+
+#vim files
+*~
