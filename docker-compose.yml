@@ -56,6 +56,18 @@ services:
     depends_on:
       - elasticsearch
 
+  elasticsearch-hq:
+    container_name: elasticsearch-hq
+    build:
+      context: elasticsearch-HQ/
+    restart: always
+    ports:
+      - "5005:5000"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
 volumes:
   es-data:
 
