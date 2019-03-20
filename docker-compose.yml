@@ -40,6 +40,15 @@ services:
     depends_on:
       - elasticsearch
 
+  graphite:
+    container_name: graphite
+    image: graphiteapp/graphite-statsd
+    ports:
+      - "2003:2003"
+      - "80:80"
+    networks:
+      - elk
+
   kibana:
     container_name: kibana
     build:
